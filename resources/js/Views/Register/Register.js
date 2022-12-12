@@ -3,9 +3,8 @@ import {Link} from "react-router-dom";
 import {Formik} from "formik";
 import * as Yup from 'Yup'
 import axios from 'axios'
-
+import {inject, observer} from 'mobx-react'
 const Register = (props) => {
-
     const [errors, setErrors] = useState([])
     const [error, setError] = useState('')
 
@@ -26,7 +25,8 @@ const Register = (props) => {
                         isLoggedIn: true,
                         user: userData
                     }
-                    alert('Kayıt Tamamlandı')
+                    props.AuthStore.saveToken(appState)
+                    props.history.push('/')
                 }else{
                     alert('Giriş yapılmadı')
                 }
@@ -158,4 +158,4 @@ const Register = (props) => {
         )
     )
 }
-export default Register
+export default inject("AuthStore")(observer(Register))

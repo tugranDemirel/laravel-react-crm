@@ -10,7 +10,13 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+module.exports = {
+    resolve: {
+        fallback:{
+            "crypto": false
+        }
+    }
+}
 mix.js('resources/js/app.js', 'public/js')
     .react()
     .postCss('resources/css/app.css', 'public/css', [

@@ -1,8 +1,9 @@
 import React from 'react'
-
-const Index = () => {
+import {inject, observer} from 'mobx-react'
+const Index = (props) => {
+    props.AuthStore.getToken()
     return (
         <div>BUrası İNdex</div>
     )
 }
-export default Index
+export default inject("AuthStore")(observer(Index))

@@ -2,13 +2,16 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import Main from "./Router";
 import {BrowserRouter, Route} from "react-router-dom";
-
+import {Provider} from "mobx-react";
+import Store from './Store/index'
 class Index extends Component {
     render() {
         return (
-           <BrowserRouter>
-               <Route component={Main}/>
-           </BrowserRouter>
+          <Provider {...Store}>
+              <BrowserRouter>
+                  <Route component={Main}/>
+              </BrowserRouter>
+          </Provider>
         );
     }
 }

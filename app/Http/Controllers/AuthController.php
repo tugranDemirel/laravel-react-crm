@@ -51,6 +51,7 @@ class AuthController extends Controller
         ], 201);
     }
 
+    // LOGIN
     public function login(Request $request){
         $request->validate([
             'email' => 'required|string|email',
@@ -82,6 +83,7 @@ class AuthController extends Controller
         ], 201);
     }
 
+    // LOGOUT
     public function logout(Request $request){
         $request->user()->token()->revoke();
         return response()->json([

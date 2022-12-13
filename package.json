@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.2.3",
+        "ckeditor4-react": "^4.1.1",
         "crypto-browserify": "^3.12.0",
         "crypto-js": "^3.1.9-1",
         "formik": "^2.2.9",
@@ -28,7 +29,10 @@
         "mobx": "^6.7.0",
         "mobx-react": "^7.6.0",
         "react-bootstrap": "^2.7.0",
+        "react-images-upload": "^1.2.7",
         "react-router-dom": "^5.2.0",
+        "react-select": "^5.7.0",
+        "sweetalert": "^2.1.2",
         "yup": "^0.32.11"
     },
     "browser": {

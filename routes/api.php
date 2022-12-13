@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\API\Product\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +21,5 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => ['auth:api']], function (){
     Route::post('/logout', [AuthController::class, 'logout']);
    Route::post('/authenticate', [AuthController::class, 'authenticate']);
+   Route::resource('product', ProductController::class);
 });

@@ -6,11 +6,16 @@ import PrivateRoute from "./PrivateRoute";
 import FrontIndex from './Views/Index/index'
 import FrontLogin from './Views/Login/Login'
 import FrontRegister from './Views/Register/Register'
+/* URUNLER*/
+import ProductIndex from './Views/Product/index'
+import ProductCreate from './Views/Product/create'
 
 const Main = () =>(
         <Switch>
             <Route path="/login" component={FrontLogin} />
             <Route path="/register" component={FrontRegister} />
+            <PrivateRoute  path="/urunler/ekle" component={ProductCreate} />
+            <PrivateRoute exac path="/urunler" component={ProductIndex} />
             <PrivateRoute exac path="/" component={FrontIndex} />
         </Switch>
 )

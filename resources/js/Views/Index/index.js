@@ -1,13 +1,13 @@
 import React from 'react'
 import {inject, observer} from 'mobx-react'
+import Layout from "../../Components/Layout/front.layout";
 const Index = (props) => {
     props.AuthStore.getToken()
-    const logout = () => {
-        props.AuthStore.removeToken()
-        props.history.push('/login')
-    }
+
     return (
-        <div>BUrası İNdex <button onClick={logout}>Çıkış</button></div>
+       <Layout>
+           <div>BUrası İNdex </div>
+       </Layout>
     )
 }
 export default inject("AuthStore")(observer(Index))

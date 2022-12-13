@@ -1,12 +1,21 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
 import {Formik} from "formik";
 import * as Yup from 'Yup'
 import axios from 'axios'
 import {inject, observer} from 'mobx-react'
+
 const Login = (props) => {
     const [errors, setErrors] = useState([])
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        if (props.AuthStore.appState !== null){
+            if(props.AuthStore.appState.isLoggedIn){
+                return props.history.push('/')
+            }
+        }
+    })
 
     const handleSubmit = async (values) => {
         await axios.post(`api/auth/login`, {...values})

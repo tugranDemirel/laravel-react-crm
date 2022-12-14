@@ -19,9 +19,11 @@ class ProductController extends Controller
     public function index()
     {
         $user = request()->user();
+        $data = Product::all();
         return response()->json([
             'success'=>true,
-            'user'=>$user
+            'user'=>$user,
+            'data' => $data
             ]);
     }
 
@@ -127,6 +129,20 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = request()->user();
+        $c = Product::where('id', $id)->where('userId', $user->id)->count();
+        if($c == 0) return response()->json(['success'=> false, 'message' => 'Ürün size ait değildir.']);
+        foreach (ProductImage::where('productId', $id)->get() as $item){
+            try { unlink(public_path($item->path)); }catch (\Exception $e) {}
+        }
+        ProductImage::where('productId', $id)->delete();
+        ProductProperty::where('productId', $id)->delete();
+        Product::where('id', $id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ürün silindi.'
+        ]);
+
     }
 }

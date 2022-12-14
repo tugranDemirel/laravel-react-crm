@@ -29,9 +29,11 @@
         "mobx": "^6.7.0",
         "mobx-react": "^7.6.0",
         "react-bootstrap": "^2.7.0",
+        "react-data-table-component": "^7.5.3",
         "react-images-upload": "^1.2.7",
         "react-router-dom": "^5.2.0",
         "react-select": "^5.7.0",
+        "styled-components": "^5.3.6",
         "sweetalert": "^2.1.2",
         "yup": "^0.32.11"
     },

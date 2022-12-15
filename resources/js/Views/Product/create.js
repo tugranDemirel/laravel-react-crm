@@ -17,7 +17,7 @@ const Create = (props) => {
     const [property, setProperty] = useState([])
 
     // verileri gönderme işlemi
-    const handleSubmit = (values, {resetForm}) => {
+    const handleSubmit = (values, {resetForm, setSubmitting}) => {
         const data = new FormData()
         images.forEach((image_file) => {
             data.append('file[]', image_file)
@@ -49,8 +49,10 @@ const Create = (props) => {
                     setImages([])
                     setProperty([])
                     swal("Başarılı", res.data.message, "success")
+                    setSubmitting(false)
                 }else {
                     swal("Hata!", res.data.message, "error");
+                    setSubmitting(false)
                 }
             }).catch((e) => {
                 console.log(e)
@@ -123,6 +125,7 @@ const Create = (props) => {
                       errors,
                       isValid,
                       isSubmitting,
+                      setSubmitting,
                       setFieldValue,
                       touched
                   }) => (

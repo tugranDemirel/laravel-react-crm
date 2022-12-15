@@ -29,7 +29,7 @@ const Edit = (props) => {
     const [defaultImages, setDefaultImages] = useState([]);
 
     // verileri gönderme işlemi
-    const handleSubmit = (values, {resetForm}) => {
+    const handleSubmit = (values, {resetForm, setSubmitting}) => {
         const data = new FormData()
         newImages.forEach((image_file) => {
             data.append('newFile[]', image_file)
@@ -60,8 +60,10 @@ const Edit = (props) => {
             .then((res) => {
                 if (res.data.success){
                     swal("Başarılı", res.data.message, "success")
+                    setSubmitting(false)
                 }else {
                     swal("Hata!", res.data.message, "error");
+                    setSubmitting(false)
                 }
             }).catch((e) => {
             console.log(e)
@@ -91,7 +93,6 @@ const Edit = (props) => {
                 Authorization: 'Bearer ' + props.AuthStore.appState.user.access_token
             }
         }).then((res) => {
-            console.log(res.data)
             if(res.data.success){
                 setCategories(res.data.categories)
                 setProduct(res.data.product)
@@ -170,6 +171,7 @@ const Edit = (props) => {
                               errors,
                               isValid,
                               isSubmitting,
+                            setSubmitting,
                               setFieldValue,
                               touched
                           }) => (

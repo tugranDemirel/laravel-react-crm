@@ -9,11 +9,13 @@ import FrontRegister from './Views/Register/Register'
 /* URUNLER*/
 import ProductIndex from './Views/Product/index'
 import ProductCreate from './Views/Product/create'
+import ProductEdit from './Views/Product/edit'
 
 const Main = () =>(
         <Switch>
             <Route path="/login" component={FrontLogin} />
             <Route path="/register" component={FrontRegister} />
+            <PrivateRoute  path="/urunler/:id/duzenle" component={ProductEdit} />
             <PrivateRoute  path="/urunler/ekle" component={ProductCreate} />
             <PrivateRoute exac path="/urunler" component={ProductIndex} />
             <PrivateRoute exac path="/" component={FrontIndex} />

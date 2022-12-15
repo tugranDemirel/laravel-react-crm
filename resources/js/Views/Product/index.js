@@ -132,7 +132,7 @@ const Index = (props) => {
                             fixedHeader={true}
                             pagination={true}
                             expandableRows={true}
-                            expandableRowsComponent={<ExpandedComponent/>}
+                            expandableRowsComponent={ <ExpandedComponent data={data} /> }
                             data={(filter.isFilter) ? filter.filteredData : data}
                             subHeaderComponent={<SubHeaderComponent
                                 filters={filterItem}

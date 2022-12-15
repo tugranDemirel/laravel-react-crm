@@ -23,4 +23,11 @@ class Product extends Model
         'tax',
 
     ];
+
+    public function properties(){
+        return $this->hasMany(ProductProperty::class, 'productId', 'id');
+    }
+    public function images(){
+        return $this->hasMany(ProductImage::class, 'productId', 'id');
+    }
 }

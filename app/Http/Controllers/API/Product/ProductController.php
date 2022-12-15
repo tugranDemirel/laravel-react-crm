@@ -106,7 +106,16 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = request()->user();
+        $c = Product::where('id', $id)->where('userId', $user->id)->count();
+        if($c == 0) return response()->json(['success'=> false, 'message' => 'Ürün size ait değildir.']);
+        $product = Product::where('id', $id)->where('userId', $user->id)->with(['properties', 'images'])->first();
+        $categories = Category::where('userId',$user->id)->get();
+        return response()->json([
+            'success'=>true,
+            'product' => $product,
+            'categories'=>$categories
+        ]);
     }
 
     /**
@@ -118,7 +127,60 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = request()->user();
+        $c = Product::where('id', $id)->where('userId', $user->id)->count();
+        if($c == 0) return response()->json(['success'=> false, 'message' => 'Ürün size ait değildir.']);
+
+        $all = $request->all();
+        $file = (isset($all['file'])) ? json_decode($all['file'], true) : [];
+        $newFile = (isset($all['newFile'])) ? $all['newFile'] : [];
+        // properties varsa json array olarak al
+
+        $properties = (isset($all['property'])) ? json_decode($all['property'], true) : [];
+
+        foreach ($file as $item){
+            if(isset($item['isRemove'])){
+                $productImage = ProductImage::where('id', $item['id'])->first();
+                try {
+                    unlink(public_path($productImage->image));
+                }catch (\Exception $e){}
+            }
+        }
+
+        foreach ($newFile as $item){
+            $upload = FileUpload::newUpload(rand(1,9000), 'products', $item, 0);
+            ProductImage::create([
+                'productId'=>id,
+                'path'=>$upload
+            ]);
+        }
+        ProductProperty::where('productId', $id)->delete();
+        foreach ($properties as $prop){
+            ProductProperty::create([
+                'productId'=>$id,
+                'property'=>$prop['property'],
+                'value'=>$prop['value']
+            ]);
+        }
+
+
+        unset($all['file']);
+        unset($all['newFile']);
+        unset($all['_method']);
+        unset($all['property']);
+        $update = Product::where('id', $id)->update($all);
+        if ($update){
+
+            return response()->json([
+                'success'=>true,
+                'message'=>'Ürün başarıyla eklendi'
+            ]);
+        }else{
+            return response()->json([
+                'success'=>false,
+                'message'=>'Ürün eklenirken bir hata oluştu'
+            ]);
+        }
     }
 
     /**

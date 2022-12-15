@@ -12,4 +12,7 @@ class ProductImage extends Model
         'productId',
         'path'
     ];
+    public function getPathAttribute(){
+        return asset($this->attributes['path']);
+    }
 }

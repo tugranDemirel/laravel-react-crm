@@ -53,6 +53,7 @@ const Layout = (props) => {
                             navbarScroll
                         >
                             <Nav.Link href="/">Yönetim Paneli</Nav.Link>
+                            <Nav.Link href="/kategoriler">Kategoriler</Nav.Link>
                             <Nav.Link href="/urunler">Ürünler</Nav.Link>
 
                             <Nav.Link href="#" disabled>

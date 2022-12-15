@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $user = request()->user();
-        $data = Product::all();
+        $data = Product::where('userId', $user->id->get());
         return response()->json([
             'success'=>true,
             'user'=>$user,
@@ -85,17 +85,6 @@ class ProductController extends Controller
                 'message'=>'Ürün eklenirken bir hata oluştu'
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

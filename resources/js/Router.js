@@ -15,6 +15,11 @@ import ProductEdit from './Views/Product/edit'
 import CategoryIndex from './Views/Category/index'
 import CategoryCreate from './Views/Category/create'
 import CategoryEdit from './Views/Category/edit'
+
+/* MUSTERILER*/
+import CustomerIndex from './Views/Customer/index'
+import CustomerCreate from './Views/Customer/create'
+import CustomerEdit from './Views/Customer/edit'
 const Main = () =>(
         <Switch>
             <Route path="/login" component={FrontLogin} />
@@ -27,6 +32,10 @@ const Main = () =>(
             <PrivateRoute  path="/kategori/:id/duzenle" component={CategoryEdit} />
             <PrivateRoute  path="/kategori/ekle" component={CategoryCreate} />
             <PrivateRoute exac path="/kategoriler" component={CategoryIndex} />
+
+            <PrivateRoute  path="/musteri/:id/duzenle" component={CustomerEdit} />
+            <PrivateRoute  path="/musteri/ekle" component={CustomerCreate} />
+            <PrivateRoute exac path="/musteriler" component={CustomerIndex} />
 
             <PrivateRoute exac path="/" component={FrontIndex} />
         </Switch>

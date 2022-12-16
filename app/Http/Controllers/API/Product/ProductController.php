@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $user = request()->user();
-        $data = Product::where('userId', $user->id->get());
+        $data = Product::where('userId', $user->id)->get();
         return response()->json([
             'success'=>true,
             'user'=>$user,
